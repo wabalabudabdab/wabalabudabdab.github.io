@@ -1,26 +1,12 @@
 <?php
-$name = trim($_POST['name']);
-$email = trim($_POST['email']);
-$phone = trim($_POST['phone']);
-$message = trim($_POST['message']);
 
-// указываем адрес отправителя, можно указать адрес на домене Вашего сайта
-$fromMail = 'admin@yousite.ru';
-$fromName = 'yousite.ru Форма';
+$recepient = "terekhovahome@gmail.com";
+$sitename = "SOS Vorota";
 
-// Сюда введите Ваш email
-$emailTo = 'terekhovahome@gmail.com';
-$subject = 'Форма обратной связи на php';
-$subject = '=?utf-8?b?'. base64_encode($subject) .'?=';
-$headers = "Content-type: text/plain; charset=\"utf-8\"\r\n";
-$headers .= "From: ". $fromName ." <". $fromMail ."> \r\n";
+$name = trim($_POST["name"]);
+$phone = trim($_POST["phone"]);
+$text = trim($_POST["text"]);
+$message = "Имя: $name \nТелефон: $phone \nТекст: $text";
 
-// тело письма
-$body = "Получено письмо с сайта testsite.ru \n Имя: $name\nТелефон: $phone \n E-mail: $email\nСообщение: $message";
-
-// сообщение будет отправлено в случае, если поле с номером телефона не пустое
-if (strlen($phone) > 0) {
-    $mail = mail($emailTo, $subject, $body, $headers, '-f'. $fromMail );
-}
-
-?>
+$pagetitle = "Новая заявка с сайта \"$sitename\"";
+mail($recepient, $pagetitle, $message, "Content-type: text/plain; charset=\"utf-8\"\n From: $recepient");
